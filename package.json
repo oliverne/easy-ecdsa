@@ -1,0 +1,43 @@
+{
+  "name": "easy-ecdsa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "",
+    "build": "rollup -c",
+    "test": "jest"
+  },
+  "dependencies": {
+    "bs58": "^4.0.1",
+    "buffer": "^5.6.0",
+    "elliptic": "6.5.3",
+    "js-sha256": "^0.9.0",
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@ava/typescript": "^1.1.1",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@types/elliptic": "6.4.12",
+    "@types/jest": "^26.0.4",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.2",
+    "rollup": "^2.21.0",
+    "rollup-plugin-typescript2": "^0.27.1",
+    "typescript": "3.9.6"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
+  }
+}
