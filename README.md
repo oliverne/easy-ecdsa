@@ -31,7 +31,7 @@ OR
 ## Usage
 
 ```js
-import { ECDSA } from 'easy-ecdsa';
+import { ECDSA } from '@oliverne/easy-ecdsa';
 
 const signer = new ECDSA();
 const message = 'My precious message';
@@ -61,6 +61,6 @@ Tested on:
 
 ## Fun Facts
 
-- I don't understand Elliptic curve. 📈
-- I don't know anything about crypto. 🔐
-- It was built for providing a client-side message signature working on React Native without native dependencies. 🤣
+- 📈 I don't understand Elliptic curve.
+- 🔐 I don't know anything about crypto.
+- 🤣 It was built for providing a client-side message signature working on React Native without native dependencies.
