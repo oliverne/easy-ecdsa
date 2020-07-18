@@ -1,12 +1,31 @@
 {
   "name": "easy-ecdsa",
-  "description": "Easy and Simple ECDSA Signer/Verifier for whom has a headache",
+  "description": "Easy and Simple ECDSA Signer/Verifier for who has a headache 🙀",
   "version": "1.0.0",
   "main": "dist/index.js",
   "browser": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "author": {
+    "name": "oliverne",
+    "email": "oliverne@gmail.com",
+    "url": "https://github.com/oliverne"
+  },
+  "keywords": [
+    "react native",
+    "ecdsa",
+    "signer",
+    "elliptic curve"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oliverne/easy-ecdsa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oliverne/easy-ecdsa/issues"
+  },
+  "homepage": "https://github.com/oliverne/easy-ecdsa/blob/master/README.md",
   "scripts": {
     "start": "yarn test && yarn build",
     "build": "cross-env NODE_ENV=production rollup -c",
