@@ -14,15 +14,15 @@ It can works on React Native apps. without installing native dependencies.
 
 ## Security
 
-- It doesn't rely on NodeJS `crypto.randombytes()` and `window.crypto.getRandomValues()` So it is considered not cryptographically secured
+- It DOESN'T rely on NodeJS `crypto.randombytes()` and `window.crypto.getRandomValues()` So it is NOT considered cryptographically secured.
 
-- Instead of native crypto API, it depends on [seedrandom](https://github.com/davidbau/seedrandom) that creates ARC4-based PRNG
+- Instead of native crypto API, it depends on [seedrandom](https://github.com/davidbau/seedrandom) to creates random values based on ARC4-based PRNG.
 
-- A message for signing is hashed by using SHA256. Although the output is Base58 encoded string, it is not "double hashing" and neither compatible with the formats used by crypto currency
+- A message for signing is hashed by using SHA256. Although the output is Base58 encoded string, it is not "Double Hashing" and neither compatible with the formats used by crypto currency.
 
 ## Install
 
-`npm i easy-ecdsa`
+`npm install easy-ecdsa`
 
 OR
 
@@ -47,7 +47,7 @@ console.log('Verified with own public key:', signer.verify(message, sig)); // ou
 
 console.log(
   'Verified with a foreign public key:',
-  signer.verify(message, sig, 'WrQng999PubKey') // output: false
+  signer.verify(message, sig, 'WrQng9999PubKey') // output: false
 );
 ```
 
@@ -61,6 +61,6 @@ Tested on:
 
 ## Fun Facts
 
-- I don't understand Elliptic curve
-- I don't know anything about crypto
-- It was built for providing a client-side message signature without native dependencies to use on React Native
+- I don't understand Elliptic curve. 📈
+- I don't know anything about crypto. 🔐
+- It was built for providing a client-side message signature working on React Native without native dependencies. 🤣
