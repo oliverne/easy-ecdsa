@@ -1,4 +1,4 @@
-# easy-ecdsa
+# @olv/easy-ecdsa
 
 Easy & Simple ECDSA(Elliptic Curve Digital Signature Algorithm) Signer/Verifier for who has a headache.
 
@@ -22,11 +22,11 @@ It can works on React Native apps. without installing native dependencies.
 
 ## Install
 
-`npm install easy-ecdsa`
+`npm install @olv/easy-ecdsa`
 
 OR
 
-`yarn add easy-ecdsa`
+`yarn add @olv/easy-ecdsa`
 
 ## Usage
 

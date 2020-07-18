@@ -1,5 +1,5 @@
 {
-  "name": "easy-ecdsa",
+  "name": "@olv/easy-ecdsa",
   "description": "Easy and Simple ECDSA Signer/Verifier for who has a headache 🙀",
   "version": "1.0.0",
   "main": "dist/index.js",
