@@ -1,7 +1,7 @@
 {
   "name": "@olv/easy-ecdsa",
   "description": "Easy and Simple ECDSA Signer/Verifier for who has a headache 🙀",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "browser": "dist/index.umd.js",
   "module": "dist/index.esm.js",
