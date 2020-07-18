@@ -1,5 +1,5 @@
-import EasyECDSA from './EasyECDSA'
+import ECDSA from './ecdsa';
 
-const ec = new EasyECDSA()
+const create = () => new ECDSA();
 
-console.log(ec)
+export { ECDSA, create };
