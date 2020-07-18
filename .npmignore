@@ -3,3 +3,4 @@ rollup.config.js
 tsconfig.json
 __tests__
 src
+*.log
