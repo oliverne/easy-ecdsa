@@ -6,14 +6,12 @@
     "sourceMap": false,
     "outDir": "./dist",
     "importHelpers": true,
+    "moduleResolution": "node",
     "strict": true,
     "baseUrl": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "tslib": ["node_modules/tslib/tslib.d.ts"]
-    }
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"]
 }
