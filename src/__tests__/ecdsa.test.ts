@@ -15,7 +15,7 @@ test('New key pair', () => {
   expect((ec as any).privateKey).not.toBeDefined();
 });
 
-test('Sign', () => {
+test('Sign from a string', () => {
   const invalidSign = (msg?: any) => {
     return () => (ec as any).sign(msg);
   };
@@ -26,11 +26,15 @@ test('Sign', () => {
   expect(ec.sign('any message')).not.toBeFalsy();
 });
 
-test('Sign from array', () => {
+test('Sign from an array', () => {
+  expect(() => ec.sign(['a', null, 'c', 'd'] as any)).toThrow();
+  expect(() => ec.sign(['a', {}, 'c', 'd'] as any)).toThrow();
+  expect(() => ec.sign(['a', undefined, 'c', 'd'] as any)).toThrow();
+
   expect(ec.sign(['a', 12345678, 'c', 'd'])).not.toBeFalsy();
 });
 
-test('Verify', () => {
+test('Verify with a string', () => {
   const sig = ec.sign('test');
   const verifying = (pkey?: string) => {
     return ec.verify('test', sig, pkey);
@@ -45,4 +49,15 @@ test('Verify', () => {
   );
   expect(verifying(ec.publicKey)).toBe(true);
   expect(verifying('WrQngPubKey99999')).toBe(false);
+});
+
+test('Verify with an array', () => {
+  const msg = ['foo', 'bar', 1234];
+  const sig = ec.sign(msg);
+
+  const verifying = (pkey?: string) => {
+    return ec.verify(msg, sig, pkey);
+  };
+
+  expect(verifying()).toBe(true);
 });

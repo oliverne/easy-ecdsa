@@ -1,5 +1,6 @@
 import base58 from 'bs58';
-import buf from 'buffer';
+import Long from 'long';
+import { Buffer as Buf } from 'buffer';
 import { ec as EC } from 'elliptic';
 import { getRandomValues } from './get-random-values';
 import { sha256 } from 'js-sha256';
@@ -25,7 +26,7 @@ export default class ECDSA {
    * Return Base58 encoded publicKey
    */
   get publicKey(): string {
-    const pkey = buf.Buffer.from(this.#publicKey);
+    const pkey = Buf.from(this.#publicKey);
 
     return base58.encode(pkey);
   }
@@ -34,15 +35,19 @@ export default class ECDSA {
    * Return Base58 encoded message signature
    * @param message will be hashed by using SHA256
    */
-  public sign(message: string): string {
+  public sign(message: string | (string | number)[]): string {
     if (!message) throw new TypeError('The message not defined');
-    if (typeof message !== 'string')
-      throw new TypeError('The message must be a string');
 
-    const digest = sha256.update(message).digest();
-    const signature = this.#keyPair.sign(buf.Buffer.from(digest));
-
-    return base58.encode(signature.toDER());
+    if (typeof message === 'string') {
+      return this.getBase58Signature(message);
+    } else if (this.validMessageArray(message)) {
+      const combined = this.arrayToBuffers(message);
+      return this.getBase58Signature(combined);
+    } else {
+      throw new TypeError(
+        'The message must be a string or an array of string or number'
+      );
+    }
   }
 
   /**
@@ -52,11 +57,23 @@ export default class ECDSA {
    * @param [publicKey] Optional, Base58 encoded public key
    */
   public verify(
-    message: string,
+    message: string | (string | number)[],
     signature: string,
     publicKey?: string
   ): boolean {
-    const digest = sha256.update(message).digest();
+    let context;
+
+    if (typeof message === 'string') {
+      context = message;
+    } else if (this.validMessageArray(message)) {
+      context = this.arrayToBuffers(message);
+    } else {
+      throw new TypeError(
+        'The message must be a string or an array of string or number'
+      );
+    }
+
+    const digest = sha256.update(context).digest();
     const sig = base58.decode(signature);
 
     let currentKey;
@@ -76,5 +93,39 @@ export default class ECDSA {
     }
 
     return currentKey.verify(digest, sig);
+  }
+
+  /**
+   * Convert an array to concatenated Buffer.
+   * Currently, every number is treated as unsigned integer
+   * @param items an array of string or number
+   */
+  private arrayToBuffers(items: (string | number)[]) {
+    const buffs = items.map((item) => {
+      if (typeof item === 'number') {
+        return Buf.from(Long.fromNumber(item, true).toBytesLE());
+      } else {
+        return Buf.from(item);
+      }
+    });
+
+    return Buf.concat(buffs);
+  }
+
+  private getBase58Signature(message: string | Buffer) {
+    const digest = sha256.update(message).digest();
+    const signature = this.#keyPair.sign(Buf.from(digest));
+
+    return base58.encode(signature.toDER());
+  }
+
+  private validMessageArray(message: any) {
+    const passed =
+      Array.isArray(message) &&
+      message.every(
+        (msg) => typeof msg === 'string' || typeof msg === 'number'
+      );
+
+    return passed;
   }
 }
