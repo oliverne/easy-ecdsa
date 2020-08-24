@@ -26,6 +26,10 @@ test('Sign', () => {
   expect(ec.sign('any message')).not.toBeFalsy();
 });
 
+test('Sign from array', () => {
+  expect(ec.sign(['a', 12345678, 'c', 'd'])).not.toBeFalsy();
+});
+
 test('Verify', () => {
   const sig = ec.sign('test');
   const verifying = (pkey?: string) => {
