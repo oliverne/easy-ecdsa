@@ -2,7 +2,7 @@
 
 Easy & Simple ECDSA(Elliptic Curve Digital Signature Algorithm) Signer/Verifier for who has a headache.
 
-It can works on React Native apps. without installing native dependencies.
+It can works on **React Native** apps. **without installing any native dependencies.**
 
 ## Features
 
@@ -34,21 +34,25 @@ OR
 import { ECDSA } from '@oliverne/easy-ecdsa';
 
 const signer = new ECDSA();
-const message = 'My precious message';
-const sig = signer.sign(message);
 
-console.log('Public key:', signer.publicKey); // output: Base58 encoded public key string
+const sig = signer.sign('My precious message'); // string
+// OR
+const sig = signer.sign(['foo', 'bar', 1234, 5678]); // an array of string or unsigned integer
 
-console.log('Message:', message);
+console.log('Public key:', signer.publicKey); 
+// output: Base58 encoded public key string
 
-console.log('Signature:', sig); // output: Base58 encoded signature string derived from the message digest hashed by SHA256
+console.log('Signature:', sig); 
+// output: Base58 encoded signature string derived from the message digest hashed by SHA256
 
-console.log('Verified with own public key:', signer.verify(message, sig)); // output: true
+console.log('Verified with own public key:', signer.verify(message, sig)); 
+// output: true
 
 console.log(
   'Verified with a foreign public key:',
-  signer.verify(message, sig, 'WrQng9999PubKey') // output: false
+  signer.verify(myMessage, sig, 'WrQng9999PubKey')
 );
+// output: false
 ```
 
 ## Compatibility
